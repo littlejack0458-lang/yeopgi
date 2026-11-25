@@ -4,63 +4,127 @@
 <title>엽기동네 삼총사 계좌</title>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
-:root{--red:#EE4427;--ink:#2A1A12;--cream:#FDF2E0;--yel:#FFD23F}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;overflow:hidden;background:var(--cream);color:var(--ink)}
-body{font:17px/1.5 'Gowun Dodum',sans-serif;height:100svh;display:flex;flex-direction:column;align-items:center;-webkit-tap-highlight-color:transparent}
-.top{position:relative;z-index:3;width:100%;background:radial-gradient(circle at 50% 20%,#ff7a3d,var(--red) 70%);padding:22px 16px 62px;text-align:center;border-bottom:7px solid var(--ink);border-radius:0 0 50% 50%/0 0 46px 46px}
-.kicker{display:inline-block;font-family:Jua,sans-serif;font-size:15px;background:#fff3c4;border:3px solid var(--ink);border-radius:99px;padding:2px 14px;transform:rotate(-3deg)}
-h1{margin:10px 0 0;font-family:Jua,sans-serif;font-weight:400;line-height:1.02;font-size:clamp(46px,15vw,74px)}
-h1 b{display:block;font-weight:400}
-h1 span{display:inline-block;color:#fff;-webkit-text-stroke:9px var(--ink);paint-order:stroke fill;text-shadow:0 6px 0 var(--ink);animation:pop .55s cubic-bezier(.3,1.7,.5,1) both}
-h1 b+b span{color:var(--yel);font-size:1.12em}
-@keyframes pop{0%{transform:translateY(-60px) scale(.3)}}
+/* VOICE: 떡볶이 포장마차처럼 시끌벅적, 근데 계좌번호는 한눈에
+   IDEA: 들어오면 캐릭터 스티커들이 우르르 쏟아져 통통 튀는 굿즈 부스
+   PICTURE: 손글씨 타이틀 + 떨어져 쌓이는 캐릭터 더미 (톡 치면 뻥 차임)
+   COLOUR/TYPE: 떡볶이 빨강 #EE4427, 크림 #FDF2E0, 노랑 #FFD23F / Jua
+   LAYOUT: 한 화면, 위 타이틀, 가운데 계좌 카드, 아래 캐릭터 더미 */
+:root{color-scheme:light;--red:#EE4427;--ink:#2A1A12;--cream:#FDF2E0;--yel:#FFD23F}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0;background:var(--cream);color:var(--ink);overflow:hidden;height:100%}
+body{font:17px/1.5 'Gowun Dodum',sans-serif;height:100svh;display:flex;flex-direction:column;align-items:center;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+.top{position:relative;z-index:3;width:100%;background:var(--red) radial-gradient(circle at 50% 20%,#ff7a3d 0,var(--red) 70%);padding:16px 16px 54px;text-align:center;border-bottom:7px solid var(--ink);border-radius:0 0 50% 50%/0 0 46px 46px}
+.kicker{display:inline-block;font-family:Jua,sans-serif;font-size:15px;background:#fff3c4;border:3px solid var(--ink);border-radius:999px;padding:2px 14px;transform:rotate(-3deg)}
+h1{margin:10px 0 0;font-family:Jua,sans-serif;font-weight:400;line-height:1.02;font-size:clamp(40px,12.5vw,66px);letter-spacing:-1px}
+h1 .row{display:block}
+h1 span.c{display:inline-block;color:#fff;-webkit-text-stroke:9px var(--ink);paint-order:stroke fill;text-shadow:0 6px 0 var(--ink);transform:translateY(var(--y)) rotate(var(--r));animation:pop .55s cubic-bezier(.3,1.7,.5,1) both;animation-delay:var(--d)}
+h1 .row2 span.c{color:var(--yel);font-size:1.12em}
+@keyframes pop{0%{transform:translateY(-60px) scale(.3) rotate(0)}100%{transform:translateY(var(--y)) rotate(var(--r))}}
 .wrap{position:relative;z-index:3;width:min(420px,90vw);margin-top:-40px}
 .card{background:#fff;border:6px solid var(--ink);border-radius:34px 28px 36px 30px;box-shadow:10px 12px 0 var(--red);padding:26px 18px 20px;text-align:center;transform:rotate(-1.2deg)}
-.bank{display:inline-block;font-family:Jua,sans-serif;font-size:21px;background:var(--yel);border:4px solid var(--ink);border-radius:99px;padding:3px 18px;transform:rotate(-3deg)}
-.num{font-family:Jua,sans-serif;font-size:clamp(28px,8.6vw,40px);margin:14px 0 4px;white-space:nowrap}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
+.price div{background:#FFF6DF;border:3px solid var(--ink);border-radius:16px;padding:6px 4px;font-family:Jua,sans-serif;line-height:1.15}
+.price small{display:block;font-size:14px;color:#7A4A35}
+.price b{font-weight:400;font-size:20px;color:var(--red)}
+.ptitle{font-family:Jua,sans-serif;font-size:20px;margin:0 0 8px}
+.line{border-top:4px dashed #E9CDB4;margin:0 0 14px}
+.bank{display:inline-block;font-family:Jua,sans-serif;font-size:21px;background:var(--yel);border:4px solid var(--ink);border-radius:999px;padding:3px 18px;transform:rotate(-3deg)}
+.num{font-family:Jua,sans-serif;font-size:clamp(28px,8.6vw,40px);letter-spacing:1px;margin:14px 0 4px;white-space:nowrap}
 .hint{font-size:14px;color:#7A4A35;margin:0 0 14px}
-button{font-family:Jua,sans-serif;font-size:21px;min-height:54px;width:100%;border:5px solid var(--ink);border-radius:20px;background:var(--red);color:#fff;box-shadow:0 6px 0 var(--ink);cursor:pointer}
+button{font:inherit;font-family:Jua,sans-serif;font-size:21px;min-height:54px;width:100%;border:5px solid var(--ink);border-radius:20px;background:var(--red);color:#fff;cursor:pointer;box-shadow:0 6px 0 var(--ink);transition:transform .08s}
 button:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
+button:focus-visible{outline:4px solid var(--yel);outline-offset:3px}
 button.ok{background:#2fa84f}
-.tip{position:relative;z-index:3;margin-top:26px;font-family:Jua,sans-serif;font-size:16px;background:#fff;border:3px solid var(--ink);border-radius:99px;padding:3px 14px;transform:rotate(2deg)}
+.st{position:absolute;height:auto;pointer-events:none;filter:drop-shadow(3px 5px 0 rgba(90,30,10,.25))}
+.s1{width:104px;left:-30px;top:-74px;transform:rotate(-12deg);animation:bob 2.4s ease-in-out infinite}
+.s2{width:100px;right:-30px;bottom:-56px;transform:rotate(9deg);animation:bob2 2.8s ease-in-out infinite}
+@keyframes bob{50%{transform:rotate(-5deg) translateY(-8px)}}
+@keyframes bob2{50%{transform:rotate(14deg) translateY(-5px)}}
+.tip{position:relative;z-index:3;margin-top:18px;font-family:Jua,sans-serif;font-size:16px;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:3px 14px;transform:rotate(2deg)}
 #pit{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-#pit img{position:absolute;left:0;top:0;pointer-events:auto;touch-action:none;user-select:none;filter:drop-shadow(2px 4px 0 rgba(90,30,10,.22))}
+#pit img{position:absolute;left:0;top:0;pointer-events:auto;cursor:grab;user-select:none;-webkit-user-drag:none;touch-action:none;filter:drop-shadow(2px 4px 0 rgba(90,30,10,.22));will-change:transform}
+@media(prefers-reduced-motion:reduce){h1 span.c,.s1,.s2{animation:none}}
 </style></head><body>
-<header class="top"><span class="kicker">떡볶이 캐릭터 프로젝트</span>
-<h1 id="t"><b>엽기동네</b><b>삼총사</b></h1></header>
-<main class="wrap"><section class="card">
-<span class="bank">KB국민은행</span>
-<div class="num" id="num">941602-01-436817</div>
-<p class="hint">버튼을 누르면 계좌번호가 복사돼요</p>
-<button id="copy" type="button">계좌번호 복사하기</button>
-</section></main>
+<header class="top">
+  <span class="kicker">떡볶이 캐릭터 프로젝트</span>
+  <h1 id="title"><span class="row">엽기동네</span><span class="row row2">삼총사</span></h1>
+</header>
+<main class="wrap">
+  <img class="st s1" src="clover.png" alt="">
+  <section class="card">
+    <p class="ptitle">🌶️ 굿즈 가격표</p>
+    <div class="price">
+      <div><small>캐릭터 스티커 1장</small><b>3,000원</b></div>
+      <div><small>스프링 노트 1권</small><b>4,000원</b></div>
+      <div><small>유리 소주잔 1개</small><b>2,000원</b></div>
+      <div><small>도자기 잔 1개</small><b>3,000원</b></div>
+    </div>
+    <div class="line"></div>
+    <span class="bank">KB국민은행</span>
+    <div class="num" id="num">941602-01-436817</div>
+    <p class="hint">버튼을 누르면 계좌번호가 복사돼요</p>
+    <button id="copy" type="button">계좌번호 복사하기</button>
+  </section>
+  <img class="st s2" src="c04.png" alt="">
+</main>
 <p class="tip">애들 톡 쳐보세요! 뻥 차여요 ⚽</p>
 <div id="pit" aria-hidden="true"></div>
 <script>{
-let k=0;for(const b of document.querySelectorAll('#t b')){const s=b.textContent;b.textContent='';[...s].forEach((c,i)=>{const e=document.createElement('span');e.textContent=c;e.style.transform=`translateY(${i%2?6:-6}px) rotate(${i%2?7:-6}deg)`;e.style.animationDelay=(k++*.07)+'s';b.appendChild(e)})}
-const btn=document.getElementById('copy');
-btn.onclick=async()=>{try{await navigator.clipboard.writeText('94160201436817');btn.textContent='복사 완료!';btn.classList.add('ok')}catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById('num'));getSelection().removeAllRanges();getSelection().addRange(r);btn.textContent='번호를 길게 눌러 복사해 주세요'}setTimeout(()=>{btn.textContent='계좌번호 복사하기';btn.classList.remove('ok')},2200)};
-const S='stroke="#2A1A12" stroke-width="5" stroke-linejoin="round"';
-const eye=(x,y)=>`<circle cx="${x}" cy="${y}" r="7" fill="#2A1A12"/><circle cx="${x+2}" cy="${y-2}" r="2.5" fill="#fff"/>`;
-const P=`<path d="M58 30c-6-20 18-26 22-10 8-8 22 2 12 14" fill="#F8E3A8" ${S}/><rect x="22" y="28" width="96" height="92" rx="34" fill="#F2553A" ${S}/><path d="M28 104h84v14c0 10-84 10-84 0z" fill="#F7832E" ${S}/>${eye(52,64)}${eye(88,64)}<path d="M62 76l8-6 8 6-8 6z" fill="#FFC928" ${S}/><ellipse cx="40" cy="80" rx="8" ry="5" fill="#FF9C9C"/><ellipse cx="100" cy="80" rx="8" ry="5" fill="#FF9C9C"/>`;
-const SO=`<path d="M48 26l6-12 8 10 8-12 8 12 8-10 6 12" fill="#E5823A" ${S}/><rect x="34" y="22" width="72" height="110" rx="36" fill="#E5823A" ${S}/><ellipse cx="54" cy="44" rx="6" ry="9" fill="#FFD3B5"/>${eye(56,64)}${eye(84,64)}<ellipse cx="70" cy="86" rx="22" ry="14" fill="#7A3410"/><ellipse cx="70" cy="86" rx="7" ry="9" fill="#E8432A" ${S}/>`;
-const MO=`<path d="M70 14L128 118Q70 138 12 118z" fill="#F59E0B" ${S}/><circle cx="70" cy="84" r="24" fill="#F23C34" ${S}/>${eye(61,80)}${eye(79,80)}<rect x="60" y="90" width="20" height="9" rx="4" fill="#FFC928" ${S}/><path d="M34 100l6-9M44 106l6-9M96 100l-6-9M106 106l-6-9" stroke="#E8432A" stroke-width="5" stroke-linecap="round"/>`;
-const svg=b=>'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">${b}</svg>`);
-const kinds=[P,SO,MO].map(svg);
-const pit=document.getElementById('pit');let W=innerWidth,H=innerHeight;
-const base=Math.max(70,Math.min(120,W*.22));
-const bodies=Array.from({length:13},(_,i)=>{const e=document.createElement('img');e.src=kinds[i%3];pit.appendChild(e);const sz=base*(.8+Math.random()*.35);e.style.width=e.style.height=sz+'px';
-return{e,s:sz,r:sz*.42,x:W*(.12+Math.random()*.76),y:-120-i*90,vx:(Math.random()-.5)*7,vy:0,a:Math.random()*60-30,va:(Math.random()-.5)*12}});
-const draw=o=>o.e.style.transform=`translate(${o.x-o.s/2}px,${o.y-o.s/2}px) rotate(${o.a}deg)`;
-function step(){for(const o of bodies){o.vy+=.55;o.vx*=.995;o.x+=o.vx;o.y+=o.vy;o.a+=o.va;o.va*=.985;
-if(o.y+o.r>H){o.y=H-o.r;if(o.vy>0)o.vy*=-.62;if(Math.abs(o.vy)<1.2)o.vy=0;o.vx*=.95;o.va=o.va*.6+o.vx*1.6}
-if(o.x<o.r){o.x=o.r;o.vx=Math.abs(o.vx)*.62}if(o.x>W-o.r){o.x=W-o.r;o.vx=-Math.abs(o.vx)*.62}}
-for(let i=0;i<bodies.length;i++)for(let j=i+1;j<bodies.length;j++){const p=bodies[i],q=bodies[j],dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy)||1,m=p.r+q.r;
-if(d<m){const nx=dx/d,ny=dy/d,ov=(m-d)/2;p.x-=nx*ov;p.y-=ny*ov;q.x+=nx*ov;q.y+=ny*ov;const rv=(q.vx-p.vx)*nx+(q.vy-p.vy)*ny;if(rv<0){const im=-1.45*rv/2;p.vx-=im*nx;p.vy-=im*ny;q.vx+=im*nx;q.vy+=im*ny}}}
-bodies.forEach(draw);requestAnimationFrame(step)}
-bodies.forEach(draw);setTimeout(()=>requestAnimationFrame(step),350);
-for(const o of bodies)o.e.addEventListener('pointerdown',ev=>{ev.preventDefault();const d=ev.clientX<o.x?1:-1;o.vx=d*(6+Math.random()*7);o.vy=-(13+Math.random()*7);o.va=d*(18+Math.random()*14)});
-addEventListener('resize',()=>{W=innerWidth;H=innerHeight});
+const ITEMS=[{"src": "c00.png", "ar": 0.529}, {"src": "c01.png", "ar": 0.876}, {"src": "c02.png", "ar": 1.093}, {"src": "c03.png", "ar": 1.185}, {"src": "c05.png", "ar": 1.141}, {"src": "c06.png", "ar": 0.503}, {"src": "c08.png", "ar": 1.0}, {"src": "c09.png", "ar": 0.618}, {"src": "c10.png", "ar": 0.965}, {"src": "c11.png", "ar": 0.915}, {"src": "soju.png", "ar": 0.744}, {"src": "phone.png", "ar": 0.976}];
+// bouncy title letters
+for(const row of document.querySelectorAll('#title .row')){
+  const t=row.textContent;row.textContent='';
+  [...t].forEach((ch,i)=>{const s=document.createElement('span');s.className='c';s.textContent=ch;
+    const k=row.classList.contains('row2')?i+4:i;
+    s.style.setProperty('--y',(i%2?6:-6)+'px');s.style.setProperty('--r',(i%2?7:-6)+'deg');s.style.setProperty('--d',(k*0.07)+'s');row.appendChild(s)});
+}
+// copy
+const b=document.getElementById('copy');
+b.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText('94160201436817');b.textContent='복사 완료!';b.classList.add('ok');}
+  catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById('num'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='번호를 길게 눌러 복사해 주세요';}
+  setTimeout(()=>{b.textContent='계좌번호 복사하기';b.classList.remove('ok')},2200);
+});
+// falling characters physics
+const pit=document.getElementById('pit');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W=innerWidth,H=innerHeight;
+const base=()=>Math.max(78,Math.min(130,W*0.23));
+const bodies=ITEMS.map((it,i)=>{
+  const el=document.createElement('img');el.src=it.src;el.alt='';el.draggable=false;pit.appendChild(el);
+  const sz=base()*(0.85+Math.random()*0.3);
+  const w=it.ar>=1?sz:sz*it.ar,h=it.ar>=1?sz/it.ar:sz;
+  el.style.width=w+'px';el.style.height=h+'px';
+  return{el,w,h,r:Math.min(w,h)*0.5+Math.abs(w-h)*0.12,x:W*(0.12+Math.random()*0.76),y:-120-i*95-Math.random()*60,
+    vx:(Math.random()-.5)*7,vy:Math.random()*2,a:Math.random()*60-30,va:(Math.random()-.5)*12,live:true};
+});
+function draw(o){o.el.style.transform=`translate(${o.x-o.w/2}px,${o.y-o.h/2}px) rotate(${o.a}deg)`}
+if(reduce){bodies.forEach((o,i)=>{o.x=W*((i%6)+0.5)/6;o.y=H-o.r-(i<6?0:o.r*1.7);o.a=0;draw(o)})}
+else{
+  const G=0.55,REST=0.62,FR=0.985;
+  function step(){
+    for(const o of bodies){
+      o.vy+=G;o.vx*=0.995;o.x+=o.vx;o.y+=o.vy;o.a+=o.va;o.va*=0.985;
+      if(o.y+o.r>H){o.y=H-o.r;if(o.vy>0)o.vy=-o.vy*REST;if(Math.abs(o.vy)<1.2)o.vy=0;o.vx*=FR*0.96;o.va=o.va*0.6+o.vx*1.6;}
+      if(o.x-o.r<0){o.x=o.r;o.vx=Math.abs(o.vx)*REST;o.va*=-0.7}
+      if(o.x+o.r>W){o.x=W-o.r;o.vx=-Math.abs(o.vx)*REST;o.va*=-0.7}
+    }
+    for(let i=0;i<bodies.length;i++)for(let j=i+1;j<bodies.length;j++){
+      const p=bodies[i],q=bodies[j];const dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy)||1,m=p.r+q.r;
+      if(d<m){const nx=dx/d,ny=dy/d,ov=(m-d)/2;p.x-=nx*ov;p.y-=ny*ov;q.x+=nx*ov;q.y+=ny*ov;
+        const rv=(q.vx-p.vx)*nx+(q.vy-p.vy)*ny;
+        if(rv<0){const imp=-(1+0.45)*rv/2;p.vx-=imp*nx;p.vy-=imp*ny;q.vx+=imp*nx;q.vy+=imp*ny;
+          p.va+=(Math.random()-.5)*3;q.va+=(Math.random()-.5)*3;}}
+    }
+    bodies.forEach(draw);requestAnimationFrame(step);
+  }
+  bodies.forEach(draw);setTimeout(()=>requestAnimationFrame(step),350);
+  // kick!
+  for(const o of bodies){o.el.addEventListener('pointerdown',e=>{e.preventDefault();
+    const dir=(e.clientX<o.x?1:-1);o.vx=dir*(6+Math.random()*7);o.vy=-(13+Math.random()*7);o.va=dir*(18+Math.random()*14);
+    o.el.animate([{filter:'drop-shadow(2px 4px 0 rgba(90,30,10,.22)) brightness(1.25)'},{filter:'drop-shadow(2px 4px 0 rgba(90,30,10,.22))'}],{duration:250});
+  })}
+}
+addEventListener('resize',()=>{W=innerWidth;H=innerHeight;if(reduce)bodies.forEach(draw)});
 }</script>
 </body></html>
